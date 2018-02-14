@@ -12,6 +12,9 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import java.util.List;
+import java.util.Objects;
+
 import static enkan.util.HttpResponseUtils.RedirectStatusCode.SEE_OTHER;
 import static kotowari.routing.UrlRewriter.redirect;
 
@@ -53,8 +56,9 @@ public class CardOrderController {
      * @return お勤め先登録ページresponse
      */
     public HttpResponse inputJob(CardOrderForm form) {
-        // エラーを出したくないので強制的にエラーを消す.
-        form.setErrors(null);
+        if (form.hasErrors()) {
+            return templateEngine.render("cardOrder/user", "form", form);
+        }
 
         return templateEngine.render("cardOrder/job", "form", form);
     }
@@ -65,8 +69,9 @@ public class CardOrderController {
      * @return 本人登録ページresponse
      */
     public HttpResponse modifyUser(CardOrderForm form) {
-        // エラーを出したくないので強制的にエラーを消す.
-        form.setErrors(null);
+        if (form.hasErrors()) {
+            return templateEngine.render("cardOrder/job", "form", form);
+        }
 
         return templateEngine.render("cardOrder/user", "form", form);
     }
@@ -79,7 +84,7 @@ public class CardOrderController {
     @Transactional
     public HttpResponse create(CardOrderForm form) {
         if (form.hasErrors()) {
-            return templateEngine.render("cardOrder/user", "form", form);
+            return templateEngine.render("cardOrder/job", "form", form);
         }
         CardOrder cardOrder = beans.createFrom(form, CardOrder.class);
 
