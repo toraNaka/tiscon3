@@ -1,0 +1,5 @@
+<div th:fragment="errorList(error)">
+    <ul class="ui red basic label" th:if="${form.hasErrors(error)}">
+        <li th:each="msg : ${form.getErrors(error)}" th:text="${msg}"></li>
+    </ul>
+</div>
