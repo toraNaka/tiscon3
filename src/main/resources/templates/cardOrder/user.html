@@ -27,7 +27,7 @@
                                 <input type="text" name="kanjiName" th:value="${form.kanjiName}"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('kanaName')} ? 'error'">
-                                <label>お名前（カナ）</label>
+                                <label>お名前（全角カナ）</label>
                                 <div th:include="cardOrder/error :: errorList('kanaName')" />
                                 <input type="text" name="kanaName" th:value="${form.kanaName}"/>
                             </div>
@@ -45,7 +45,7 @@
                             <div class="field" th:classappend="${form.hasErrors('dateOfBirth')} ? 'error'">
                                 <label>生年月日</label>
                                 <div th:include="cardOrder/error :: errorList('dateOfBirth')" />
-                                <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}"/>
+                                <input type="date" name="dateOfBirth" th:value="${form.dateOfBirth}"/>
                             </div>
                             <div class="field" th:classappend="${form.hasErrors('zipCode')} ? 'error'">
                                 <label>郵便番号</label>
